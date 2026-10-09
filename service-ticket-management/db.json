@@ -1,0 +1,44 @@
+{
+  "tickets": [
+    {
+      "employeeName": "Rahul",
+      "department": "Development",
+      "issueType": "Laptop",
+      "description": "Laptop is not starting.",
+      "ticketDate": "2026-08-10",
+      "priority": "High",
+      "status": "Open",
+      "id": 1
+    },
+    {
+      "id": 2,
+      "employeeName": "Priya",
+      "department": "HR",
+      "issueType": "Email",
+      "description": "Unable to send emails",
+      "priority": "Medium",
+      "ticketDate": "2026-08-11",
+      "status": "Resolved"
+    },
+    {
+      "id": 3,
+      "employeeName": "Amit",
+      "department": "Testing",
+      "issueType": "Printer",
+      "description": "Printer is not connecting",
+      "priority": "Low",
+      "ticketDate": "2026-08-09",
+      "status": "Rejected"
+    },
+    {
+      "employeeName": "Harshal Palve",
+      "department": "Development",
+      "issueType": "Internet",
+      "description": "internet",
+      "ticketDate": "2026-10-09",
+      "priority": "High",
+      "status": "Open",
+      "id": 4
+    }
+  ]
+}
