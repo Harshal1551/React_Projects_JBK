@@ -1,0 +1,23 @@
+{
+  "products": [
+    {
+      "id": "1",
+      "name": "Laptop",
+      "category": "Electronics",
+      "price": "70000"
+    },
+    {
+      "id": "2",
+      "name": "Mobile",
+      "category": "Electronics",
+      "price": 20000
+    },
+    {
+      "name": "Book",
+      "category": "book",
+      "price": "500",
+      "id": "IqzWnIAjH08"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
