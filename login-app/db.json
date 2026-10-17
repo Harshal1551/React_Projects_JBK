@@ -1,0 +1,43 @@
+{
+  "users": [
+    {
+      "firstname": "Harshal",
+      "lastname": "Palve",
+      "email": "harshal123@gmail.com",
+      "username": "harshal1551",
+      "password": "Harshal1551",
+      "mobile": 3344,
+      "securityquestion": "What is you pet name?",
+      "securityanswer": "tommy",
+      "id": "cArG2H08dGM"
+    },
+    {
+      "firstname": "Ram",
+      "lastname": "Patil",
+      "email": "ram321@gmail.com",
+      "username": "ram123",
+      "password": "Ram321",
+      "mobile": 1122,
+      "securityquestion": "What is you pet name?",
+      "securityanswer": "tommy",
+      "id": "Arj4-76GsSk"
+    }
+  ],
+  "messages": [
+    {
+      "conversationId": "community",
+      "senderUsername": "harshal1551",
+      "text": "Hiii",
+      "createdAt": "2026-10-17T07:11:50.585Z",
+      "id": "TnXmnjR7-F0"
+    },
+    {
+      "conversationId": "support",
+      "senderUsername": "harshal1551",
+      "text": "hii",
+      "createdAt": "2026-10-17T07:12:22.664Z",
+      "id": "lwK6MoMe1to"
+    }
+  ],
+  "$schema": "./node_modules/json-server/schema.json"
+}
