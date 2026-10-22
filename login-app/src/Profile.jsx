@@ -8,17 +8,22 @@ const Profile = () => {
   const [user, setUser] = useState(() =>
     JSON.parse(localStorage.getItem("userdetail") || "null")
   );
+
   const [editing, setEditing] = useState(false);
   const [saving, setSaving] = useState(false);
 
-  const isLoggedIn = localStorage.getItem("loginStatus") === "success";
+  const isLoggedIn =
+    localStorage.getItem("loginStatus") === "success";
 
   if (!isLoggedIn || !user) {
     return <Navigate to="/" replace />;
   }
 
   const handleChange = (e) => {
-    setUser((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+    setUser((prev) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+    }));
   };
 
   const handleSave = async (e) => {
@@ -31,13 +36,17 @@ const Profile = () => {
       const duplicate = users.some(
         (u) =>
           u.id !== user.id &&
-          (u.email?.toLowerCase() === user.email.trim().toLowerCase() ||
-            u.username?.toLowerCase() === user.username.trim().toLowerCase() ||
+          (u.email?.toLowerCase() ===
+            user.email.trim().toLowerCase() ||
+            u.username?.toLowerCase() ===
+            user.username.trim().toLowerCase() ||
             String(u.mobile) === user.mobile.trim())
       );
 
       if (duplicate) {
-        alert("That email, username, or mobile number is already in use.");
+        alert(
+          "That email, username, or mobile number is already in use."
+        );
         return;
       }
 
@@ -50,15 +59,27 @@ const Profile = () => {
         mobile: user.mobile.trim(),
       };
 
-      const { data } = await api.put(`/users/${user.id}`, updatedUser);
+      console.log("Image selected:", Boolean(updatedUser.propic));
+      console.log("Image size:", updatedUser.propic?.length ?? 0);
+
+
+      const { data } = await api.patch(`/users/${user.id}`, updatedUser);
 
       setUser(data);
       localStorage.setItem("userdetail", JSON.stringify(data));
       setEditing(false);
+
       alert("Profile updated successfully!");
     } catch (error) {
       console.error("Profile update error:", error);
-      alert("Unable to update your profile.");
+      console.error("Response:", error.response?.data);
+
+      alert(
+        error.response
+          ? `Update failed: ${error.response.status} - ${error.response.statusText || "Request rejected"
+          }`
+          : "Unable to connect to JSON Server. Check that it is running on port 3000."
+      );
     } finally {
       setSaving(false);
     }
@@ -66,10 +87,14 @@ const Profile = () => {
 
   const handleImageChange = (e) => {
     const file = e.target.files?.[0];
+
     if (!file) return;
 
-    if (!file.type.startsWith("image/") || file.size > 1024 * 1024) {
-      alert("Choose an image smaller than 1 MB.");
+    if (
+      !file.type.startsWith("image/") ||
+      file.size > 500 * 1024
+    ) {
+      alert("Please choose an image smaller than 500 KB.");
       e.target.value = "";
       return;
     }
@@ -77,18 +102,30 @@ const Profile = () => {
     const reader = new FileReader();
 
     reader.onloadend = () => {
-      setUser((prev) => ({ ...prev, propic: reader.result }));
+      setUser((prev) => ({
+        ...prev,
+        propic: reader.result,
+      }));
+    };
+
+    reader.onerror = () => {
+      alert("Unable to read this image. Please try another image.");
     };
 
     reader.readAsDataURL(file);
+    e.target.value = "";
   };
 
   return (
     <main className="dashboard-page">
       <header className="dashboard-header">
         <Link to="/dashboard" className="dashboard-brand">
-          <span className="brand-mark dashboard-brand-mark">T</span>
-          <span>TKA <strong>SOCIAL</strong></span>
+          <span className="brand-mark dashboard-brand-mark">
+            T
+          </span>
+          <span>
+            TKA <strong>SOCIAL</strong>
+          </span>
         </Link>
 
         <Link to="/dashboard" className="profile-action">
@@ -103,7 +140,10 @@ const Profile = () => {
           <p>Manage your personal information.</p>
         </div>
 
-        <form className="profile-page-body" onSubmit={handleSave}>
+        <form
+          className="profile-page-body"
+          onSubmit={handleSave}
+        >
           <div className="profile-page-avatar">
             {user.propic ? (
               <img src={user.propic} alt="Profile" />
@@ -134,7 +174,10 @@ const Profile = () => {
               ["mobile", "Mobile number"],
             ].map(([name, label]) => (
               <div className="form-group" key={name}>
-                <label htmlFor={`profile-${name}`}>{label}</label>
+                <label htmlFor={`profile-${name}`}>
+                  {label}
+                </label>
+
                 <input
                   id={`profile-${name}`}
                   name={name}
@@ -143,7 +186,9 @@ const Profile = () => {
                   onChange={handleChange}
                   readOnly={!editing}
                   required
-                  pattern={name === "mobile" ? "[0-9]{10}" : undefined}
+                  pattern={
+                    name === "mobile" ? "[0-9]{10}" : undefined
+                  }
                   maxLength={name === "mobile" ? 10 : undefined}
                 />
               </div>
@@ -158,7 +203,9 @@ const Profile = () => {
                   className="secondary-button"
                   onClick={() => {
                     setUser(
-                      JSON.parse(localStorage.getItem("userdetail") || "null")
+                      JSON.parse(
+                        localStorage.getItem("userdetail") || "null"
+                      )
                     );
                     setEditing(false);
                   }}

@@ -1,12 +1,12 @@
 {
   "users": [
     {
-      "firstname": "Harshal",
+      "firstname": "Harsh",
       "lastname": "Palve",
       "email": "harshal123@gmail.com",
       "username": "harshal1551",
       "password": "Harshal1551",
-      "mobile": 3344,
+      "mobile": "3344121212",
       "securityquestion": "What is you pet name?",
       "securityanswer": "tommy",
       "id": "cArG2H08dGM"
